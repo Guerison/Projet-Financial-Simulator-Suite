@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Financial Simulator Suite</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172026;
+      --muted: #64717d;
+      --line: #d8e0e7;
+      --panel: #ffffff;
+      --bg: #f5f7fa;
+      --green: #1f8a5b;
+      --blue: #2c6bb3;
+      --red: #bf4d43;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    header {
+      padding: 32px 24px 18px;
+      border-bottom: 1px solid var(--line);
+      background: #ffffff;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 24px auto 40px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .card h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    input {
+      width: 100%;
+      margin-top: 6px;
+      padding: 10px 11px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 16px;
+      padding: 11px 14px;
+      border: 0;
+      border-radius: 6px;
+      color: white;
+      background: var(--blue);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 6px;
+      background: #eef5fb;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    .positive {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .negative {
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    .summary {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .metric {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .metric strong {
+      font-size: 24px;
+    }
+
+    @media (max-width: 860px) {
+      .grid,
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Financial Simulator Suite</h1>
+    <p>Interactive visual preview for ROI, real estate profitability and startup valuation scenarios.</p>
+  </header>
+
+  <main>
+    <section class="grid" aria-label="Financial simulators">
+      <article class="card">
+        <h2>ROI Calculator</h2>
+        <label for="initial">Initial investment (EUR)</label>
+        <input id="initial" type="number" value="10000" min="1">
+        <label for="final">Final value (EUR)</label>
+        <input id="final" type="number" value="12500">
+        <button type="button" onclick="calculateRoi()">Calculate ROI</button>
+        <div class="result" id="roiResult"></div>
+      </article>
+
+      <article class="card">
+        <h2>Real Estate</h2>
+        <label for="price">Property price (EUR)</label>
+        <input id="price" type="number" value="200000" min="1">
+        <label for="rent">Annual rent (EUR)</label>
+        <input id="rent" type="number" value="14400" min="0">
+        <label for="costs">Annual costs (EUR)</label>
+        <input id="costs" type="number" value="3400" min="0">
+        <button type="button" onclick="calculateRealEstate()">Calculate Yield</button>
+        <div class="result" id="estateResult"></div>
+      </article>
+
+      <article class="card">
+        <h2>Startup Valuation</h2>
+        <label for="revenue">Annual revenue (EUR)</label>
+        <input id="revenue" type="number" value="500000" min="0">
+        <label for="growth">Growth rate</label>
+        <input id="growth" type="number" value="0.2" min="0" step="0.01">
+        <button type="button" onclick="calculateStartup()">Estimate Value</button>
+        <div class="result" id="startupResult"></div>
+      </article>
+    </section>
+
+    <section class="summary" aria-label="Portfolio summary">
+      <div class="metric">
+        <span>Sample ROI</span>
+        <strong id="roiMetric">25.00%</strong>
+      </div>
+      <div class="metric">
+        <span>Sample Rental Yield</span>
+        <strong id="estateMetric">5.50%</strong>
+      </div>
+      <div class="metric">
+        <span>Sample Startup Value</span>
+        <strong id="startupMetric">3,500,000 EUR</strong>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function formatMoney(value) {
+      return `${value.toLocaleString("en-US", { maximumFractionDigits: 2 })} EUR`;
+    }
+
+    function readNumber(id) {
+      return Number(document.getElementById(id).value);
+    }
+
+    function calculateRoi() {
+      const initial = readNumber("initial");
+      const finalValue = readNumber("final");
+      const result = document.getElementById("roiResult");
+
+      if (initial <= 0) {
+        result.textContent = "Initial investment must be greater than zero.";
+        return;
+      }
+
+      const profit = finalValue - initial;
+      const roi = (profit / initial) * 100;
+      const className = profit >= 0 ? "positive" : "negative";
+
+      result.innerHTML = `Profit: <span class="${className}">${formatMoney(profit)}</span><br>ROI: <span class="${className}">${roi.toFixed(2)}%</span>`;
+      document.getElementById("roiMetric").textContent = `${roi.toFixed(2)}%`;
+    }
+
+    function calculateRealEstate() {
+      const price = readNumber("price");
+      const rent = readNumber("rent");
+      const costs = readNumber("costs");
+      const result = document.getElementById("estateResult");
+
+      if (price <= 0 || rent < 0 || costs < 0) {
+        result.textContent = "Please enter a valid price, rent and costs.";
+        return;
+      }
+
+      const income = rent - costs;
+      const yieldPercent = (income / price) * 100;
+      const className = income >= 0 ? "positive" : "negative";
+
+      result.innerHTML = `Net yearly income: <span class="${className}">${formatMoney(income)}</span><br>Rental yield: <span class="${className}">${yieldPercent.toFixed(2)}%</span>`;
+      document.getElementById("estateMetric").textContent = `${yieldPercent.toFixed(2)}%`;
+    }
+
+    function calculateStartup() {
+      const revenue = readNumber("revenue");
+      const growth = readNumber("growth");
+      const result = document.getElementById("startupResult");
+
+      if (revenue < 0 || growth < 0) {
+        result.textContent = "Revenue and growth rate cannot be negative.";
+        return;
+      }
+
+      const adjustedMultiple = 5 + growth * 10;
+      const valuation = revenue * adjustedMultiple;
+
+      result.innerHTML = `Adjusted multiple: <span class="positive">${adjustedMultiple.toFixed(2)}x</span><br>Estimated valuation: <span class="positive">${formatMoney(valuation)}</span>`;
+      document.getElementById("startupMetric").textContent = formatMoney(valuation);
+    }
+
+    calculateRoi();
+    calculateRealEstate();
+    calculateStartup();
+  </script>
+</body>
+</html>

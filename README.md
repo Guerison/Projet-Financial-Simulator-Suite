@@ -1,197 +1,110 @@
-💰 Financial Simulator Suite
+# Financial Simulator Suite
 
-Un projet Python en ligne de commande qui simule plusieurs scénarios d’analyse financière.
+A clean Python command-line project that simulates three common financial analysis scenarios:
 
-Ce projet a été créé pour démontrer des compétences en modélisation financière, analyse d’investissement et programmation Python dans le cadre d’un portfolio (finance / audit / conseil).
+- ROI of an investment
+- Real estate rental profitability
+- Startup valuation using a revenue multiple
 
-🎯 Présentation du projet
+This project is designed for a GitHub portfolio and can be used to demonstrate financial reasoning, basic Python programming and structured modelling logic.
 
-Cette application permet de simuler trois cas financiers concrets :
+## Project Structure
 
-📈 ROI d’un investissement
-🏠 Rentabilité d’un investissement immobilier
-🚀 Valorisation d’une startup
-
-Tout fonctionne en ligne de commande : simple, clair et professionnel.
-
-🧠 Pourquoi ce projet ?
-
-Réalisé dans le cadre d’un portfolio d’école de commerce pour mettre en avant :
-
-Le raisonnement financier
-Une logique de modélisation structurée
-Une architecture de projet Python propre
-Des bases de tests automatisés
-
-Idéal pour un portfolio GitHub orienté finance, conseil, audit ou data.
-
-✨ Fonctionnalités
-📈 Calculateur de ROI
-
-Calcule le profit et le retour sur investissement.
-
-Formule
-
-ROI = ((Valeur finale − Investissement initial) / Investissement initial) × 100
-🏠 Simulateur d’investissement immobilier
-
-Estime la rentabilité locative annuelle.
-
-Formules
-
-Revenu net = Loyer annuel − Coûts annuels  
-Rendement locatif = (Revenu net / Prix du bien) × 100
-🚀 Modèle de valorisation de startup
-
-Estime la valorisation d’une startup via un multiple de revenus.
-
-Formules
-
-Multiple ajusté = Multiple de base + (Taux de croissance × 10)  
-Valorisation = Revenu annuel × Multiple ajusté
-🏗 Structure du projet
+```text
 financial-simulator/
-│
-├── main.py
-├── roi_calculator.py
-├── real_estate.py
-├── startup_valuation.py
-├── requirements.txt
-├── visualization.html
-│
-├── docs/
-│   └── example_results.md
-│
-└── tests/
-    └── test_financial_simulator.py
-▶️ Lancer l’application
+|-- main.py
+|-- roi_calculator.py
+|-- real_estate.py
+|-- startup_valuation.py
+|-- requirements.txt
+|-- visualization.html
+|-- docs/
+|   `-- example_results.md
+`-- tests/
+    `-- test_financial_simulator.py
+```
 
-Depuis le dossier du projet :
+## Features
 
+### ROI Calculator
+
+Calculates profit and return on investment.
+
+Formula:
+
+```text
+ROI = ((Final Value - Initial Investment) / Initial Investment) * 100
+```
+
+### Real Estate Investment
+
+Calculates net yearly income and net rental yield.
+
+Formula:
+
+```text
+Net Income = Annual Rent - Annual Costs
+Rental Yield = (Net Income / Property Price) * 100
+```
+
+### Startup Valuation
+
+Estimates valuation with a simple revenue multiple approach.
+
+Formula:
+
+```text
+Adjusted Multiple = Base Multiple + (Growth Rate * 10)
+Valuation = Annual Revenue * Adjusted Multiple
+```
+
+## How to Run
+
+From the project folder:
+
+```bash
 python main.py
+```
 
-Puis choisir une option dans le menu :
+Then choose one of the menu options:
 
-1 - Calculateur de ROI  
-2 - Investissement immobilier  
-3 - Valorisation de startup  
-4 - Quitter
-🧪 Lancer les tests
+```text
+1 - ROI Calculator
+2 - Real Estate Investment
+3 - Startup Valuation
+4 - Exit
+```
 
-Le projet inclut une suite de tests unitaires.
+## How to Run Tests
 
+From the project folder:
+
+```bash
 python -m unittest discover tests
+```
 
-Les tests vérifient les formules principales et les contrôles d’entrée.
+The test suite validates the main formulas and input checks.
 
-🌐 Aperçu visuel
+## Visual Preview
 
-Ouvrir visualization.html dans un navigateur pour tester une version visuelle simple des simulateurs.
+Open `visualization.html` in a browser to interact with a simple visual version of the three simulators.
 
-Aucune installation nécessaire.
+No installation is required.
 
-🛠 Technologies utilisées
-Python 3
-Interface en ligne de commande (CLI)
-Tests unitaires (unittest)
+## Example Use Cases
 
-💰 Financial Simulator Suite
+- Evaluate whether an investment generated a positive return
+- Analyze the profitability of a rental property
+- Estimate the value of a startup based on revenue and growth
 
-Un projet Python en ligne de commande qui simule plusieurs scénarios d’analyse financière.
+## CV Line
 
-Ce projet a été créé pour démontrer des compétences en modélisation financière, analyse d’investissement et programmation Python dans le cadre d’un portfolio (finance / audit / conseil).
+**GitHub Project - Financial Simulator Suite**  
+Developed a Python-based financial modelling tool to simulate ROI, real estate profitability and startup valuation, with automated tests and portfolio-ready documentation.
 
-🎯 Présentation du projet
+## Possible Improvements
 
-Cette application permet de simuler trois cas financiers concrets :
-
-📈 ROI d’un investissement
-🏠 Rentabilité d’un investissement immobilier
-🚀 Valorisation d’une startup
-
-Tout fonctionne en ligne de commande : simple, clair et professionnel.
-
-🧠 Pourquoi ce projet ?
-
-Réalisé dans le cadre d’un portfolio d’école de commerce pour mettre en avant :
-
-Le raisonnement financier
-Une logique de modélisation structurée
-Une architecture de projet Python propre
-Des bases de tests automatisés
-
-Idéal pour un portfolio GitHub orienté finance, conseil, audit ou data.
-
-✨ Fonctionnalités
-📈 Calculateur de ROI
-
-Calcule le profit et le retour sur investissement.
-
-Formule
-
-ROI = ((Valeur finale − Investissement initial) / Investissement initial) × 100
-🏠 Simulateur d’investissement immobilier
-
-Estime la rentabilité locative annuelle.
-
-Formules
-
-Revenu net = Loyer annuel − Coûts annuels  
-Rendement locatif = (Revenu net / Prix du bien) × 100
-🚀 Modèle de valorisation de startup
-
-Estime la valorisation d’une startup via un multiple de revenus.
-
-Formules
-
-Multiple ajusté = Multiple de base + (Taux de croissance × 10)  
-Valorisation = Revenu annuel × Multiple ajusté
-🏗 Structure du projet
-financial-simulator/
-│
-├── main.py
-├── roi_calculator.py
-├── real_estate.py
-├── startup_valuation.py
-├── requirements.txt
-├── visualization.html
-│
-├── docs/
-│   └── example_results.md
-│
-└── tests/
-    └── test_financial_simulator.py
-▶️ Lancer l’application
-
-Depuis le dossier du projet :
-
-python main.py
-
-Puis choisir une option dans le menu :
-
-1 - Calculateur de ROI  
-2 - Investissement immobilier  
-3 - Valorisation de startup  
-4 - Quitter
-🧪 Lancer les tests
-
-Le projet inclut une suite de tests unitaires.
-
-python -m unittest discover tests
-
-Les tests vérifient les formules principales et les contrôles d’entrée.
-
-🌐 Aperçu visuel
-
-Ouvrir visualization.html dans un navigateur pour tester une version visuelle simple des simulateurs.
-
-Aucune installation nécessaire.
-
-🛠 Technologies utilisées
-Python 3
-Interface en ligne de commande (CLI)
-Tests unitaires (unittest)
-
-
-<img width="1869" height="894" alt="image" src="https://github.com/user-attachments/assets/5621c421-ad21-46d0-9dbf-76d75f2b89a9" />
-
+- Add charts with Matplotlib
+- Export scenario results to CSV
+- Add an Excel version
+- Build a Streamlit web app
