@@ -193,4 +193,5 @@ Interface en ligne de commande (CLI)
 Tests unitaires (unittest)
 
 
+<img width="1869" height="894" alt="image" src="https://github.com/user-attachments/assets/5621c421-ad21-46d0-9dbf-76d75f2b89a9" />
 
